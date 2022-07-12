@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://caster.png" type="Texture" id=1]
 [ext_resource path="res://player/player.gd" type="Script" id=2]
+[ext_resource path="res://player/progressBar.png" type="Texture" id=3]
+[ext_resource path="res://player/progressBar2.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.0
@@ -71,13 +73,20 @@ __meta__ = {
 }
 
 [node name="level_progress" type="ProgressBar" parent="."]
+visible = false
 margin_left = -518.0
 margin_top = -580.0
 margin_right = 520.0
 margin_bottom = -542.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="ExpBar" type="TextureProgress" parent="."]
+margin_left = -523.0
+margin_top = -568.0
+margin_right = 577.0
+margin_bottom = -528.0
+value = 20.0
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="on_death/respawn" to="." method="_on_respawn_pressed"]

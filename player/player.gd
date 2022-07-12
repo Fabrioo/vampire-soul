@@ -13,16 +13,16 @@ var max_speed = 32
 var scoup = 0
 var expiriance = 0
 var level = 0
-var next_level_expirience = 1000
-var this_level_expiriance = 0.0001
+export var next_level_expirience = 1000
+onready var this_level_expiriance = 0.0001
 var next = 1000
 
 var velocity = Vector2(0,-1)
 var moving = false
 var dead = false
 
-
 func _ready():
+	
 	pass
 
 func _process(delta):
@@ -109,18 +109,35 @@ func _on_Timer_timeout():
 		scoup += 1
 	$scoup.text = str(scoup)
 
-
-func expirience_Area_body_entered(body):
+func expirience_Area_body_entered(this_level_expiriance,next_level_expirience,body):
 	if body.test() == "exp":
 		print(expiriance)
 		expiriance += body.number()
-		$level_progress.value = (expiriance-this_level_expiriance)/(next_level_expirience-this_level_expiriance)*100
-		if expiriance >= next_level_expirience:
-			this_level_expiriance = next_level_expirience
-			next_level_expirience += next
-			next += 100
-			level += 1
-			print("level_up")
+		
+	$ExpBar.value = expiriance
+	$ExpBar.max_value = (expiriance-this_level_expiriance)/(next_level_expirience-this_level_expiriance)*100
+	if expiriance >= next_level_expirience:
+		this_level_expiriance = next_level_expirience
+		next_level_expirience += next
+		next += 100
+		level += 1
+		print("level_up")
+
+#func update_exp():
+#	$ExpBar.value = expiriance
+	
+
+#func expirience_Area_body_entered(body):
+#	if body.test() == "exp":
+#		print(expiriance)
+#		expiriance += body.number()
+#		$level_progress.value = (expiriance-this_level_expiriance)/(next_level_expirience-this_level_expiriance)*100
+#		if expiriance >= next_level_expirience:
+#			this_level_expiriance = next_level_expirience
+#			next_level_expirience += next
+#			next += 100
+#			level += 1
+#			print("level_up")
 
 func test():
 	return "player"
