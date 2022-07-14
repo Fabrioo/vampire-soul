@@ -18,9 +18,9 @@ func _process(delta):
 
 
 func _on_Area2D_body_entered(body):
-	print(body.test())
-	if body.test() != "player":
+	if body.test() != "player" and body.test() != "exp" and body.test() != "wall":
 		body.hit(damage)
+		print(body.test())
 		queue_free()
 
 func hit(damag):
